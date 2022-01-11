@@ -11,6 +11,8 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import org.techtown.air.pollution.covid19_app.data.Repository
 import org.techtown.air.pollution.covid19_app.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -53,14 +55,7 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else{
             // fetchData
-            cancellationTokenSource = CancellationTokenSource()
-
-            fusedLocationProviderClient.getCurrentLocation(
-                LocationRequest.PRIORITY_HIGH_ACCURACY,
-                cancellationTokenSource!!.token
-            ).addOnSuccessListener { location ->
-                binding.textView.text = "${location.latitude}, ${location.longitude}"
-            }
+             fetchAirQualityData()
         }
     }
 
@@ -80,8 +75,22 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    @SuppressLint("MissingPermission")
+    private fun fetchAirQualityData(){
+        cancellationTokenSource = CancellationTokenSource()
 
+        fusedLocationProviderClient.getCurrentLocation(
+            LocationRequest.PRIORITY_HIGH_ACCURACY,
+            cancellationTokenSource!!.token
+        ).addOnSuccessListener { location ->
+            scope.launch {
+               val monitoringStation =
+                   Repository.getNearbyMonitoringStation(location.latitude, location.longitude)
 
+                binding.textView.text = monitoringStation?.stationName
+            }
+        }
+    }
     companion object {
         private const val REQUEST_ACCESS_LOCATION_PERMISSIONS = 100
     }
