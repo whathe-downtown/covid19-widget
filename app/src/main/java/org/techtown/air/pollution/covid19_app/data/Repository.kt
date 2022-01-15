@@ -8,6 +8,7 @@ import org.techtown.air.pollution.covid19_app.data.models.monitoringstation.Moni
 import org.techtown.air.pollution.covid19_app.data.services.AirKoreaApiService
 import org.techtown.air.pollution.covid19_app.data.services.Covid19DomesticApiService
 import org.techtown.air.pollution.covid19_app.data.services.KakaoLocalApiService
+import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -44,6 +45,7 @@ object Repository {
     suspend fun getLatestCovid19DomesticData(TotalCaseBefore: String): Covid19DomesticApiService? =
         covid19DomesticApiService
             .getRealtimeCovid19Infection(TotalCaseBefore)
+
 
 
 
