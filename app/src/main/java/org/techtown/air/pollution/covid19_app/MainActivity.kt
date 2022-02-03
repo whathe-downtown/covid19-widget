@@ -1,22 +1,16 @@
 package org.techtown.air.pollution.covid19_app
 
-import android.Manifest
-import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.os.Build
+
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.*
-import org.techtown.air.pollution.covid19_app.data.Repository
+
 import org.techtown.air.pollution.covid19_app.databinding.ActivityMainBinding
-import retrofit2.awaitResponse
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +23,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         bindViews()
+        //네이게이션들을 담은 호스트
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host) as NavHostFragment
+
+        //네비게이션 컨트롤러
+        val naController = navHostFragment.navController
+
+        //바텀 네비게이션 뷰 와 네비게이션을 묶어준다
+
+        NavigationUI.setupWithNavController(binding.myBottomNav, naController)
     }
 
     private fun bindViews() {

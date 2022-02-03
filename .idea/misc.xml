@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/android_kotlin_fast/covid19app/app/src/main/res/layout/activity_main.xml" value="0.2657407407407407" />
+        <entry key="..\:/android_kotlin_fast/covid19app/app/src/main/res/layout/fragment_friends.xml" value="0.14629629629629629" />
+        <entry key="..\:/android_kotlin_fast/covid19app/app/src/main/res/layout/fragment_home.xml" value="0.14629629629629629" />
+        <entry key="..\:/android_kotlin_fast/covid19app/app/src/main/res/layout/fragment_music.xml" value="0.1" />
+        <entry key="..\:/android_kotlin_fast/covid19app/app/src/main/res/menu/bottom_nav_menu.xml" value="0.6" />
       </map>
     </option>
   </component>

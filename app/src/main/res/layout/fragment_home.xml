@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#8BC34A"
+    android:id="@+id/homeFragement"
+    tools:context="org.techtown.air.pollution.covid19_app.fragments.HomeFragment">
+
+    <TextView
+        android:id="@+id/home_Fragemnt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="홈 프래그먼트"
+        android:textSize="50sp"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
