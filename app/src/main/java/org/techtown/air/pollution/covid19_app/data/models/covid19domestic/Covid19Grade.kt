@@ -2,7 +2,7 @@ package org.techtown.air.pollution.covid19_app.data.models.covid19domestic
 
 import com.google.gson.annotations.SerializedName
 
-enum class covid19Grade {  // 나중에 기능
+enum class Covid19Grade {  // 나중에 기능
 
     @SerializedName("1") //1~100명
     GOOD,
