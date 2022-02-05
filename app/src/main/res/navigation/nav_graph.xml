@@ -9,12 +9,20 @@
         android:id="@+id/homeFragment"
         android:name="org.techtown.air.pollution.covid19_app.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/friendsFragment"
         android:name="org.techtown.air.pollution.covid19_app.fragments.FriendsFragment"
         android:label="fragment_friends"
-        tools:layout="@layout/fragment_friends" />
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/action_friendsFragment_to_musicFragment"
+            app:destination="@id/musicFragment" />
+    </fragment>
     <fragment
         android:id="@+id/musicFragment"
         android:name="org.techtown.air.pollution.covid19_app.fragments.MusicFragment"

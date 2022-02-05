@@ -1,12 +1,12 @@
 package org.techtown.air.pollution.covid19_app.data
 
+import androidx.viewbinding.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.techtown.air.pollution.covid19_app.BuildConfig
 import org.techtown.air.pollution.covid19_app.data.services.CovidApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+
 
 
 object Repository {

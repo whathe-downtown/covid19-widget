@@ -5,27 +5,69 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import org.techtown.air.pollution.covid19_app.data.Repository
 import org.techtown.air.pollution.covid19_app.databinding.FragmentHomeBinding
 
 class HomeFragment: Fragment() {
 
-    private var mBinding : FragmentHomeBinding? =null
+    private var _binding : FragmentHomeBinding? =null
+    private val bindng get() = _binding!!
 
+    private val scope = MainScope()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = bindng.root
+        return  view
+    }
 
-        val binding = FragmentHomeBinding.inflate(inflater, container , false)
-        mBinding = binding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        bindViews()
+        fetchCovidData()
+    }
 
-        return mBinding?.root
+    private fun bindViews() {
+        bindng.refresh.setOnRefreshListener {
+//            fetchCovidData()
+        }
+    }
+
+    private fun fetchCovidData() {
+        scope.launch {
+            bindng.errorDescriptionTextView.visibility = View.GONE
+            try {
+                val covid19MeasuredValue =
+                    Repository.covidApi.getCovid()
+
+                displayCovidData()
+            }catch (exception : Exception){
+               bindng.errorDescriptionTextView.visibility =View.VISIBLE
+               bindng.homeFragement.alpha = 0F
+            }finally {
+                bindng.progresBar.visibility = View.GONE
+                bindng.refresh.isRefreshing = false
+            }
+        }
 
     }
 
+    private fun displayCovidData() {
+       bindng.homeFragement.animate()
+            .alpha(1F)
+            .start()
+
+
+    }
+
+
     override fun onDestroy() {
-        mBinding =null
         super.onDestroy()
+        _binding =null
     }
 }
