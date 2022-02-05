@@ -6,7 +6,7 @@
     android:id="@+id/contentsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0"
+
     android:orientation="vertical"
     tools:context=".MainActivity">
     <!-- 프레그 먼트 들이 보여질 컨테이녀뷰 -->

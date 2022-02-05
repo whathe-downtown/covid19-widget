@@ -17,20 +17,13 @@ import org.techtown.air.pollution.covid19_app.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val scope = MainScope()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-        containFragment()
-
-    }
-
-
-    private fun containFragment(){
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host) as NavHostFragment
 
         //네비게이션 컨트롤러
@@ -41,28 +34,8 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.myBottomNav, naController)
     }
 
-
-    private fun displayCovidData() {
-      binding.contentsLayout.animate()
-          .alpha(1F)
-          .start()
-
-        binding.myNavHost.
-    }
-
-
-    companion object {
-        private const val REQUEST_ACCESS_LOCATION_PERMISSIONS = 100
-    }
-
-
-
-
-
-
-
     override fun onDestroy() {
         super.onDestroy()
-        scope.cancel()
+
     }
 }

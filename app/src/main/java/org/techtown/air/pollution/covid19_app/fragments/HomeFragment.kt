@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.techtown.air.pollution.covid19_app.data.Repository
+import org.techtown.air.pollution.covid19_app.data.models.covid19domestic.Covid19MeasuredValue
 import org.techtown.air.pollution.covid19_app.databinding.FragmentHomeBinding
+import retrofit2.awaitResponse
 
 class HomeFragment: Fragment() {
 
@@ -34,7 +36,7 @@ class HomeFragment: Fragment() {
 
     private fun bindViews() {
         bindng.refresh.setOnRefreshListener {
-//            fetchCovidData()
+            fetchCovidData()
         }
     }
 
@@ -43,9 +45,12 @@ class HomeFragment: Fragment() {
             bindng.errorDescriptionTextView.visibility = View.GONE
             try {
                 val covid19MeasuredValue =
-                    Repository.covidApi.getCovid()
+                    Repository.covidApi.getCovid().awaitResponse()
+                if (covid19MeasuredValue.isSuccessful){
+                   val data = covid19MeasuredValue.body()!!
+                        displayCovidData(data)
+                }
 
-                displayCovidData()
             }catch (exception : Exception){
                bindng.errorDescriptionTextView.visibility =View.VISIBLE
                bindng.homeFragement.alpha = 0F
@@ -57,10 +62,12 @@ class HomeFragment: Fragment() {
 
     }
 
-    private fun displayCovidData() {
+    private fun displayCovidData(covid19MeasuredValue: Covid19MeasuredValue) {
        bindng.homeFragement.animate()
             .alpha(1F)
             .start()
+
+        bindng.totalCase.text = covid19MeasuredValue.totalCaseBefore
 
 
     }
